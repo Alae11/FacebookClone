@@ -32,4 +32,8 @@ public class UserController {
     public User signIn(@RequestBody User user){
         return userRepo.findByEmailAndPass(user.getEmail(),user.getPassword());
     }
+    @GetMapping("/delete")
+    public void deleteUsers(){
+         userRepo.deleteAll();
+    }
 }

@@ -19,8 +19,13 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public User createUser(@RequestBody User user){
-        return userRepo.save(user);
+    public Object createUser(@RequestBody User user){
+        if(userRepo.findByEmail(user.getEmail())==null){
+            return userRepo.save(user);
+        }
+        else
+            return new RuntimeException("Invalid Email Adress");
+
     }
 
     @PostMapping("/signIn")

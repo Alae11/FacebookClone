@@ -3,7 +3,9 @@ package com.example.demo.endpoints;
 import com.example.demo.dao.UserRepo;
 import com.example.demo.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,12 +21,12 @@ public class UserController {
     }
 
     @PostMapping("/signUp")
-    public Object createUser(@RequestBody User user){
+    public Object createUser(@RequestBody User user) throws Exception{
         if(userRepo.findByEmail(user.getEmail())==null){
             return userRepo.save(user);
         }
         else
-            return new RuntimeException("Invalid Email Adress");
+            throw  new ResponseStatusException(HttpStatus.FORBIDDEN,"Invalid Email Adress",new RuntimeException("Invalid Email Adress"));
 
     }
 

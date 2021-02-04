@@ -16,9 +16,15 @@ public class PublicationController {
     public Publication postPub(@RequestBody Publication pub ){
         return publicationRepo.save(pub);
     }
+
     @GetMapping("api/all")
     public List<Publication> postPub( ){
         return publicationRepo.findAll();
-
     }
+
+    @GetMapping("/deletePub")
+    public void deleteUsers(){
+        publicationRepo.deleteAll();
+    }
+
 }

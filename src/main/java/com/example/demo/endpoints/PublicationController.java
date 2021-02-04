@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController@CrossOrigin("*")
+@RestController@CrossOrigin("*")@RequestMapping("/api")
 public class PublicationController {
     @Autowired
     private PublicationRepo publicationRepo;
 
-    @PostMapping("/api/post")
+    @PostMapping("/post")
     public Publication postPub(@RequestBody Publication pub ){
         return publicationRepo.save(pub);
     }
 
-    @GetMapping("api/all")
+    @GetMapping("/all")
     public List<Publication> postPub( ){
         return publicationRepo.findAll();
     }

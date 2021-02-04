@@ -3,7 +3,6 @@ package com.example.demo.endpoints;
 import com.example.demo.dao.UserRepo;
 import com.example.demo.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,11 @@ public class UserController {
         return userRepo.findAll();
     }
 
+    @GetMapping("user/{id}")
+    public User getUser(@PathVariable("id") Long id){
+        return userRepo.findById(id).get();
+    }
+
     @PostMapping("/signUp")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         if(userRepo.findByEmail(user.getEmail())==null){
@@ -38,6 +42,6 @@ public class UserController {
     }
     @GetMapping("/delete")
     public void deleteUsers(){
-         userRepo.deleteAll();
+        userRepo.deleteAll();
     }
 }

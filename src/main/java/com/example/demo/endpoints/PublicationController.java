@@ -22,9 +22,9 @@ public class PublicationController {
         return publicationRepo.findAll();
     }
 
-    @GetMapping("/deletePub")
-    public void deleteUsers(){
-        publicationRepo.deleteAll();
+    @GetMapping("/deletePub/{id}")
+    public void deleteUsers(@PathVariable("id") Long id){
+        publicationRepo.deleteById(id);
     }
 
 }
